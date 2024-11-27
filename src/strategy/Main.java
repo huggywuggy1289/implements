@@ -1,6 +1,6 @@
 package strategy;
 
-// Strategy interface
+// Strategy interface : 모든 지원 알고리즘에 대한 공통 인터페이스 선언
 interface PaymentStrategy {
     void pay(int amount);
 }
@@ -47,23 +47,23 @@ class BitcoinPayment implements PaymentStrategy {
     }
 }
 
-// Context class
+// Context class 현재 상태가 무엇이냐에 따라 다른일을 한다.
 class ShoppingCart {
     private PaymentStrategy paymentStrategy;
 
     public void setPaymentStrategy(PaymentStrategy paymentStrategy) {
-        this.paymentStrategy = paymentStrategy;
+        this.paymentStrategy = paymentStrategy; // 이게 각각의 state에 따라 다른 상태를 보여줌.
     }
 
     public void checkout(int amount) {
-        paymentStrategy.pay(amount);
+        paymentStrategy.pay(amount);// 이게 각각의 state에 따라 다른 상태를 보여줌.
     }
 }
 
 // Client code
 public class Main {
     public static void main(String[] args) {
-        ShoppingCart cart = new ShoppingCart();
+        ShoppingCart cart = new ShoppingCart(); //context클래스 소환
 
         cart.setPaymentStrategy(new CreditCardPayment("1234-5678-9876-5432"));
         cart.checkout(100);

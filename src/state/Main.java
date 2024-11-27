@@ -1,11 +1,11 @@
 package state;
 
-// State interface
+// State interface: 상태를 대표하는 부모 클래스
 interface State {
     void write(DocumentContext context, String text);
 }
 
-// Concrete State 1
+// Concrete State 1 구체적인 상태구현
 class EditingState implements State {
     @Override
     public void write(DocumentContext context, String text) {
@@ -19,7 +19,7 @@ class EditingState implements State {
     }
 }
 
-// Concrete State 2
+// Concrete State 2 구체적인 상태구현 
 class ReadOnlyState implements State {
     @Override
     public void write(DocumentContext context, String text) {
@@ -32,12 +32,13 @@ class ReadOnlyState implements State {
     }
 }
 
-// Context class
+// Context class 클라이언트의 요청을 처리하기 위한 인터페이스
 class DocumentContext {
-    private State state;
+    private State state; // static이 없으므로 클래스 변수이다.
 
     public DocumentContext() {
-        state = new EditingState(); // Default state
+        state = new EditingState(); // 생성자에 현제 상태를 Editing state로 지정
+        // state는 인스턴스 변수 즉 클래스 레벨에서 선언된 변수이며, 객체의 상태를 저장하므로 지역변수선언을 하면 안된다.
     }
 
     public void setState(State state) {

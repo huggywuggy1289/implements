@@ -3,7 +3,7 @@ package observer;
 import java.util.ArrayList;
 import java.util.List;
 
-// Subject interface
+// Subject interface : observer 객체를 등록/삭제/알림
 interface Subject {
     void registerObserver(Observer observer);
     void removeObserver(Observer observer);
@@ -20,8 +20,8 @@ class WeatherStation implements Subject {
     }
 
     public void setTemperature(float temperature) {
-        this.temperature = temperature;
-        notifyObservers();
+        this.temperature = temperature; // 온도상태 관리
+        notifyObservers(); // 상태가 변경되면 모든 관찰자에게 상태 변경사실을 알림
     }
 
     public float getTemperature() {
@@ -38,7 +38,7 @@ class WeatherStation implements Subject {
         observers.remove(observer);
     }
 
-    @Override
+    @Override // 모든 관찰자에게 알린다는 메서드 구체화
     public void notifyObservers() {
         for (Observer observer : observers) {
             observer.update();
@@ -47,17 +47,17 @@ class WeatherStation implements Subject {
 }
 
 // Observer interface
-interface Observer {
+interface Observer { // subject 상태가 변경되면 통지받는 클래스
     void update();
 }
 
-// Concrete Observer
+// Concrete Observer Observer 인터페이스를 구현한 구체적인 관찰자 클래스
 class TemperatureDisplay implements Observer {
     private WeatherStation weatherStation;
 
     public TemperatureDisplay(WeatherStation weatherStation) {
         this.weatherStation = weatherStation;
-        this.weatherStation.registerObserver(this);
+        this.weatherStation.registerObserver(this);//WeatherStation 객체에 관찰자로 등록
     }
 
     @Override

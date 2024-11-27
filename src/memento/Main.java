@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Memento class
+// 객체의 상태를 저장합니다. 이 클래스는 상태를 캡처하고, 상태를 반환하는 메서드를 제공합니다.
 class TextMemento {
     private String text;
 
@@ -16,7 +17,7 @@ class TextMemento {
     }
 }
 
-// Originator class
+// Originator class: 클래스는 상태를 생성하고, Memento 객체에 상태를 저장하거나 복원하는 역할
 class TextEditor {
     private String text;
 
@@ -38,8 +39,8 @@ class TextEditor {
     }
 }
 
-// Caretaker class
-class TextCaretaker {
+// Caretaker class : 이 클래스는 Memento 객체를 저장하고, 필요한 Memento 객체를 반환
+class TextCaretaker { // 연산수행은 xx
     private List<TextMemento> mementoList = new ArrayList<>();
 
     public void add(TextMemento state) {
@@ -47,11 +48,11 @@ class TextCaretaker {
     }
 
     public TextMemento get(int index) {
-        return mementoList.get(index);
+        return mementoList.get(index); // 지정된 인덱스의 Memento 객체를 반환
     }
 }
 
-// Client code
+// Client code : TextEditor와 TextCaretaker 객체를 생성
 public class Main {
     public static void main(String[] args) {
         TextEditor textEditor = new TextEditor();

@@ -61,7 +61,7 @@ class RemoteControl {
 public class Main {
     public static void main(String[] args) {
         Light light = new Light();
-        Command turnOn = new TurnOnLightCommand(light);
+        Command turnOn = new TurnOnLightCommand(light); //concretecommand의 메서드를 호출
         Command turnOff = new TurnOffLightCommand(light);
 
         RemoteControl remote = new RemoteControl();

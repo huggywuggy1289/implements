@@ -3,18 +3,19 @@ package interpreter;
 import java.util.HashMap;
 import java.util.Map;
 
-// Abstract Expression
+// Abstract Expression 공통의 추상화된 연산을 구현
 interface Expression {
+    // 주어진 문맥에 따라 표현식을 평가한다는 의미
     boolean interpret(Map<String, Boolean> context);
 }
 
-// Terminal Expression
+// Terminal Expression : 리프노드 즉 가장 말단노드에 해당되는 연산을 함
 class Variable implements Expression {
     private String name;
 
     public Variable(String name) {
         this.name = name;
-    }
+    } // 변수의 이름을 사용하여 문맥에서 해당 변수의 값을 반환한다.
 
     @Override
     public boolean interpret(Map<String, Boolean> context) {
@@ -22,7 +23,7 @@ class Variable implements Expression {
     }
 }
 
-// Non-terminal Expression for AND operation
+// Non-terminal Expression for AND operation: 중간 노드에 해당하는 연산을 함
 class AndExpression implements Expression {
     private Expression expr1;
     private Expression expr2;
@@ -38,7 +39,7 @@ class AndExpression implements Expression {
     }
 }
 
-// Non-terminal Expression for OR operation
+// Non-terminal Expression for OR operation : 중간 노드에 해당하는 연산을 함
 class OrExpression implements Expression {
     private Expression expr1;
     private Expression expr2;
@@ -54,9 +55,10 @@ class OrExpression implements Expression {
     }
 }
 
-// Non-terminal Expression for NOT operation
+// Non-terminal Expression for NOT operation : 중간 노드에 해당하는 연산을 함
+// 리프노드 연산클래스와의 차이는 다른 표현식을 멤버변수로 포함한다. --ㅂ
 class NotExpression implements Expression {
-    private Expression expr;
+    private Expression expr; // 이런식으로 --ㅂ
 
     public NotExpression(Expression expr) {
         this.expr = expr;
@@ -64,7 +66,7 @@ class NotExpression implements Expression {
 
     @Override
     public boolean interpret(Map<String, Boolean> context) {
-        return !expr.interpret(context);
+        return !expr.interpret(context); // 그리고 이런식으로 논리연산을 진행한다. --ㅂ
     }
 }
 

@@ -9,7 +9,7 @@ interface ChatMediator {
     void addUser(User user);
 }
 
-// Concrete Mediator
+// Concrete Mediator :colleague 객체들의 동작을 조정함
 class ChatMediatorImpl implements ChatMediator {
     private List<User> users;
 
