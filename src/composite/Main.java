@@ -2,13 +2,13 @@ package composite;
 
 import java.util.ArrayList;
 import java.util.List;
-
-// Component interface
+// 객체를 트리구조로 구성
+// Component interface : leaf와 composite를 동일하게 다룰수 있게 해주는 부모 클래스
 interface FileSystemComponent {
     void showDetails();
 }
 
-// Leaf class
+// Leaf class : 다른 객체를 포함할 수 없는 클래스
 class File implements FileSystemComponent {
     private String name;
 
@@ -22,9 +22,10 @@ class File implements FileSystemComponent {
     }
 }
 
-// Composite class
+// Composite class : 다른 객체를 포함할 수 있는 클래스 - 복합체
 class Directory implements FileSystemComponent {
     private String name;
+    // 디렉토리 내부에 포함된 파일이나 하위 디렉토리를 저장하는 리스트
     private List<FileSystemComponent> components = new ArrayList<>();
 
     public Directory(String name) {
@@ -34,6 +35,7 @@ class Directory implements FileSystemComponent {
     @Override
     public void showDetails() {
         System.out.println("Directory: " + name);
+        // 재귀 호출
         for (FileSystemComponent component : components) {
             component.showDetails();
         }

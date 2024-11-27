@@ -3,12 +3,12 @@ package flyweight;
 import java.util.HashMap;
 import java.util.Map;
 
-// Flyweight interface
+// Flyweight interface Flyweight 객체들이 구현해야 할 메서드를 정의
 interface Shape {
     void draw();
 }
 
-// Concrete Flyweight class
+// Concrete Flyweight class : Shape 인터페이스를 구현
 class Circle implements Shape {
     private String color;
     private int x;
@@ -37,7 +37,7 @@ class Circle implements Shape {
     }
 }
 
-// Flyweight Factory
+// Flyweight Factory : Circle 객체를 생성하고 관리
 class ShapeFactory {
     private static final Map<String, Shape> circleMap = new HashMap<>();
 

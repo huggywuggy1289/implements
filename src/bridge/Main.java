@@ -1,6 +1,6 @@
 package bridge;
 
-// Implementor interface
+// Implementor interface : 구현 계층 구조의 최상위 클래스
 interface Device {
     void turnOn();
     void turnOff();
@@ -48,21 +48,22 @@ class Radio implements Device {
         System.out.println("Setting Radio volume to " + volume);
     }
 }
+// -------------------------------------------------기능과 구현의 분리---------------------------
 
-// Abstraction
+// Abstraction : 기능 계층 구조에서의 최상위 클래스
 abstract class RemoteControl {
     protected Device device;
 
-    protected RemoteControl(Device device) {
+    protected RemoteControl(Device device) { // 구현계층의 디바이스 참조
         this.device = device;
     }
-
+    // 추상적인 기능 정의
     public abstract void turnOn();
     public abstract void turnOff();
     public abstract void setVolume(int volume);
 }
 
-// Refined Abstraction
+// Refined Abstraction: 세부 추상화 계층이자 실제 기능 구현
 class BasicRemoteControl extends RemoteControl {
     public BasicRemoteControl(Device device) {
         super(device);
@@ -87,9 +88,9 @@ class BasicRemoteControl extends RemoteControl {
 // Client code
 public class Main {
     public static void main(String[] args) {
-        Device tv = new TV();
-        RemoteControl tvRemote = new BasicRemoteControl(tv);
-        tvRemote.turnOn();
+        Device tv = new TV(); // 최상위 구현계층을 참조하는 변수 = new 실제 구현클래스;
+        RemoteControl tvRemote = new BasicRemoteControl(tv); // 그 변수를 실제 기능클래스에 넣어서
+        tvRemote.turnOn(); // 그 변수를 통해 실제 기능 구현 가능
         tvRemote.setVolume(10);
         tvRemote.turnOff();
 
